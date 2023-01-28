@@ -10,13 +10,15 @@
             name="viewModelLogon"
             type="com.brunadev.devheroapp.login.viewmodel.LogonViewModel" />
     </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
         app:cardCornerRadius="15dp">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -199,6 +201,6 @@
 
                 />
         </LinearLayout>
-
     </FrameLayout>
+    </ScrollView>
 </layout>
