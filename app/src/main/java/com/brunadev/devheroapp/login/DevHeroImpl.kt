@@ -22,6 +22,7 @@ class DevHeroImpl : DevHeroRepository {
     private var userA = User(UUID.randomUUID().toString(), "UserA", "b@", "12345", "12345")
 
     override fun loginUser(user: User?): LiveData<UserResponse?> {
+
         val data = MutableLiveData<UserResponse?>()
 
         if (userA.email.equals(user?.email) && userA.password.equals(user?.password)) {
@@ -54,6 +55,7 @@ class DevHeroImpl : DevHeroRepository {
     }
 
     override fun newUser(user: User?): LiveData<UserResponse?> {
+
         val data = MutableLiveData<UserResponse?>()
 
         val disposableObserver = remoteDataSource.logonRequest(user)
@@ -81,7 +83,6 @@ class DevHeroImpl : DevHeroRepository {
         disposableObserver?.let { compositeDisposable.add(it) }
         return data
     }
-
 }
 
 
