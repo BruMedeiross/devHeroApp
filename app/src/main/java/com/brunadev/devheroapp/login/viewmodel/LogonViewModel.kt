@@ -2,14 +2,14 @@ package com.brunadev.devheroapp.login.viewmodel
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.*
-import com.brunadev.devheroapp.login.NewUserRepository
-import com.brunadev.devheroapp.login.NewUserRepositoryImpl
+import com.brunadev.devheroapp.login.DevHeroImpl
+import com.brunadev.devheroapp.login.DevHeroRepository
 import com.brunadev.devheroapp.login.data.model.User
 import com.brunadev.devheroapp.login.data.model.UserResponse
 import java.util.*
 
 
-class LogonViewModel(private val repository: NewUserRepository = NewUserRepositoryImpl()) :
+class LogonViewModel(private val repository: DevHeroRepository = DevHeroImpl()) :
     ViewModel() {
 
     var email = ObservableField("")

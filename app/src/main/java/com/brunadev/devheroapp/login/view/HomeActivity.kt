@@ -1,11 +1,9 @@
 package com.brunadev.devheroapp.login.view
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.brunadev.devheroapp.R
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.activity_logon.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -27,3 +25,24 @@ class HomeActivity : AppCompatActivity() {
        label_notify.text = getString(R.string.label_notice_home_user, idUser?.length.toString())
     }
 }
+
+//
+//private val listOfCharacter = arrayListOf(
+//    Character(
+//        id = 1,
+//        name = "Personagem",
+//        image = null
+//    ),
+//    Character(
+//        id = 0,
+//        name = "Personagem",
+//        image = null
+//    )
+//)
+//
+//private  fun populateList(){
+//    characterList.apply {
+//        hasFixedSize()
+//        adapter = CharacterAdapter(listOfCharacter)
+//    }
+//}

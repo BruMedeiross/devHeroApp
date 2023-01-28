@@ -7,8 +7,9 @@ import com.brunadev.devheroapp.login.data.model.User
 import com.brunadev.devheroapp.login.data.model.UserResponse
 
 
-interface LoginRepository {
+interface DevHeroRepository {
 
     fun loginUser (user: User?) : LiveData<UserResponse?>
+    fun newUser (user: User?) : LiveData<UserResponse?>
 
 }

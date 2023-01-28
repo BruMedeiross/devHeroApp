@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         setObservers()
+        //ver*
     }
 
     private fun setObservers() {

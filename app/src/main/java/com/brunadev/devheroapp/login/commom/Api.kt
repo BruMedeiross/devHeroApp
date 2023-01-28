@@ -27,6 +27,4 @@ interface Api {
 
     @POST("/post")
     fun logoutUser(): Observable<LoginResponse>
-
-
 }

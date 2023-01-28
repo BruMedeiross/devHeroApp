@@ -8,6 +8,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object HTTPClient {
+
     private const val BASE_URL = "https://httpbin.org"
 
     var gson = GsonBuilder()
@@ -31,5 +32,4 @@ object HTTPClient {
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
         .create(Api::class.java)
-
 }
