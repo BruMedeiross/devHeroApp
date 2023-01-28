@@ -11,5 +11,4 @@ interface DevHeroRepository {
 
     fun loginUser (user: User?) : LiveData<UserResponse?>
     fun newUser (user: User?) : LiveData<UserResponse?>
-
 }
