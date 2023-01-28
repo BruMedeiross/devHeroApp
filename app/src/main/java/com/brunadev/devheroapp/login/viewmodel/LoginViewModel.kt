@@ -36,7 +36,7 @@ class LoginViewModel(private val repository: DevHeroRepository = DevHeroImpl()) 
         return if (email.get().toString().isEmpty()
             || !email.get().toString().contains("@")
             || password.get().toString().isEmpty()
-            || password.get().toString().length < 5
+            || password.get().toString().length <= 5
         ) {
             if (password.get().toString().isEmpty() || (password.get().toString().length < 5)) {
             }
