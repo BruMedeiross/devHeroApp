@@ -19,7 +19,7 @@ class DevHeroImpl : DevHeroRepository {
     private val remoteDataSource = RemoteDataSource()
     private val compositeDisposable = CompositeDisposable()
 
-    private var userA = User(UUID.randomUUID().toString(), "UserA", "b@", "12345", "12345")
+    private var userA = User(UUID.randomUUID().toString(), "UserA", "b@", "12345", "123456")
 
     override fun loginUser(user: User?): LiveData<UserResponse?> {
 
