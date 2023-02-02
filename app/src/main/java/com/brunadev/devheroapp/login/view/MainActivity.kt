@@ -45,11 +45,38 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // TODO: Adicionar no onCreate para evitar o "reload" dos observers
     override fun onStart() {
         super.onStart()
         setObservers()
     }
 
+    // TODO: Adicionar observador para validacao de formulario E respostas do servidor
+    /* Exemplo:
+    private fun setObservers() {
+        with(viewModel) {
+            formState.observe(this@MainActivity) { valid ->
+                if (!valid) {
+                    invalidLogin()
+                } else {
+                    viewModel.request()
+                }
+            }
+        }
+
+        with(viewModel) {
+            userState.observe(this@MainActivity) { user ->
+                if (user != null) {
+                    validLogin(user)
+                    goToHomeScreen(user)
+                } else {
+                    invalidLogin()
+                }
+            }
+        }
+    }
+    */
+    
     private fun setObservers() {
         with(viewModel) {
             doLogin().observe(this@MainActivity) { user ->
@@ -63,8 +90,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // TODO: Remover extension, transformando-o em função da classe
     fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        // TODO: Adicionar o binding para evitar nullpointer do kotlin synthetic
         imm.hideSoftInputFromWindow(emailText.windowToken, 0)
         imm.hideSoftInputFromWindow(passwordText.windowToken, 0)
     }
