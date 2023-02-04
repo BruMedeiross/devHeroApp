@@ -31,4 +31,5 @@
     <string name="text_app_information_account">Apresente seu trabalho e encontre novas inspirações, escolhidas especialmente pra você</string>
     <string name="pass_error_confirm">Senhas não conferem</string>
     <string name="username_error">Nome de usuário inválido</string>
+    <string name="label_logout">Logout</string>
 </resources>

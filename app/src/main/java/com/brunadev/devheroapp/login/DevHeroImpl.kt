@@ -19,9 +19,9 @@ class DevHeroImpl : DevHeroRepository {
     private val remoteDataSource = RemoteDataSource()
     private val compositeDisposable = CompositeDisposable()
 
-    private var userA = User(UUID.randomUUID().toString(), "UserA", "b@", "12345", "123456")
+    private var userA = User(UUID.randomUUID().toString(), "UserA", "b@", "123456", "123456")
 
-    override fun loginUser(user: User?): LiveData<UserResponse?> {
+    override fun loginUser(user: User): LiveData<UserResponse?> {
 
         val data = MutableLiveData<UserResponse?>()
 
@@ -54,7 +54,7 @@ class DevHeroImpl : DevHeroRepository {
         return data
     }
 
-    override fun newUser(user: User?): LiveData<UserResponse?> {
+    override fun newUser(user: User): LiveData<UserResponse?>{
 
         val data = MutableLiveData<UserResponse?>()
 
@@ -73,7 +73,6 @@ class DevHeroImpl : DevHeroRepository {
                     }
                 }
 
-                @SuppressLint("NullSafeMutableLiveData")
                 override fun onError(e: Throwable) {
                     e.printStackTrace()
                     data.postValue(null)
@@ -83,6 +82,35 @@ class DevHeroImpl : DevHeroRepository {
         disposableObserver?.let { compositeDisposable.add(it) }
         return data
     }
+
+//    override fun getProjects(): MutableLiveData<List<Projects?>> {
+//        val data = MutableLiveData<List<Projects?>?>()
+//
+//        val disposableObserver = remoteDataSource.listProjects()
+//            .observeOn(Schedulers.io())
+//            .subscribeOn(AndroidSchedulers.mainThread())
+//            .subscribeWith(object : DisposableObserver<List<Projects?>>() {
+//                override fun onComplete() {
+//                }
+//
+//                override fun onNext(response: List<Projects?>) {
+//                    if (response.isNotEmpty()) {
+//                        data.postValue(response)
+//                    } else {
+//                        data.postValue(null)
+//                    }
+//                }
+//
+//                @SuppressLint("NullSafeMutableLiveData")
+//                override fun onError(e: Throwable) {
+//                    e.printStackTrace()
+//                    data.postValue(null)
+//                }
+//            })
+//
+//        disposableObserver?.let { compositeDisposable.add(it) }
+//        return data
+//    }
 }
 
 

@@ -17,27 +17,36 @@ class LogonViewModel(private val repository: DevHeroRepository = DevHeroImpl()) 
     var password = ObservableField("")
     var confirmPass = ObservableField("")
 
-    private val liveData = MutableLiveData<UserResponse?>()
+    private val _newUserState = MediatorLiveData<UserResponse?>()
+    val newUserState: LiveData<UserResponse?> get() = _newUserState
 
-    fun newUserAccount(): LiveData<UserResponse?> {
-        val data = if (validate()) {
-            repository.newUser(
-                User(
-                    id = UUID.randomUUID().toString(),
-                    name = userName.get(),
-                    email = email.get(),
-                    password = password.get(),
-                    passwordConfirm = confirmPass.get()
-                )
-            )
+    private val _formState = MutableLiveData<Boolean>()
+    val formState: LiveData<Boolean> get() = _formState
+
+    fun newUserAccount() {
+        if (validate()) {
+            _formState.postValue(true)
         } else {
-            liveData.postValue(null)
-            return liveData
+            _formState.postValue(false)
         }
-        return data
     }
 
-    fun validate(): Boolean {
+    fun createNewUserAccount() {
+        val liveDataRequest = repository.newUser(
+            User(
+                id = UUID.randomUUID().toString().trim(),
+                name = userName.get()?.trim(),
+                email = email.get()?.trim(),
+                password = password.get()?.trim(),
+                passwordConfirm = confirmPass.get()?.trim()
+            )
+        )
+        _newUserState.addSource(liveDataRequest) { userResponse ->
+            _newUserState.postValue(userResponse)
+        }
+    }
+
+    private fun validate(): Boolean {
         return if (email.get().toString().isEmpty()
             || !email.get().toString().contains("@")
             || password.get().toString().isEmpty()
@@ -55,8 +64,7 @@ class LogonViewModel(private val repository: DevHeroRepository = DevHeroImpl()) 
                 || userName.get().toString().length < 5
                 || confirmPass.get().toString().isEmpty()
                 || userName.get().toString().isEmpty()
-            ) {
-            }
+            ) { }
             false
         } else {
             true

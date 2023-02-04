@@ -44,17 +44,17 @@
                     android:textColor="@color/black2"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/label_logon"
-                    app:layout_constraintTop_toTopOf="@id/label_logon" />
+                    app:layout_constraintEnd_toStartOf="@id/btn_logout"
+                    app:layout_constraintTop_toTopOf="@id/btn_logout" />
 
                 <TextView
-                    android:id="@+id/label_logon"
+                    android:id="@+id/btn_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:drawableBottom="@drawable/ic_baseline_horizontal_rule_24"
                     android:fontFamily="sans-serif-medium"
-                    android:text="@string/label_logon"
+                    android:text="@string/label_logout"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"

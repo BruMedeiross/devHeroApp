@@ -4,45 +4,55 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.brunadev.devheroapp.R
 import com.brunadev.devheroapp.databinding.ActivityLogonBinding
 import com.brunadev.devheroapp.login.data.model.UserResponse
 import com.brunadev.devheroapp.login.viewmodel.LogonViewModel
-import kotlinx.android.synthetic.main.activity_logon.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.*
+
 
 class LogonActivity : AppCompatActivity() {
-    private lateinit var viewModel: LogonViewModel
+
+    private lateinit var viewModelLogon: LogonViewModel
+    private lateinit var binding: ActivityLogonBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding =
-            DataBindingUtil.setContentView<ActivityLogonBinding>(this, R.layout.activity_logon)
-        viewModel = ViewModelProvider(this)[LogonViewModel::class.java]
-        binding.viewModelLogon = viewModel
+        binding = ActivityLogonBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        btn_acess_logon.setOnClickListener {
-            it.hideKeyboard()
-            setObservers()
+        viewModelLogon = ViewModelProvider(this)[LogonViewModel::class.java]
+        binding.viewModelLogon = viewModelLogon
+
+        setObservers()
+
+        binding.btnAcessLogon.setOnClickListener {
+            hideKeyboard()
+            viewModelLogon.newUserAccount()
+        }
+
+        binding.btnLoginLogon.setOnClickListener {
+            goToLoginScreen()
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        setObservers()
-    }
-
     private fun setObservers() {
-        with(viewModel) {
-            newUserAccount().observe(this@LogonActivity) { user ->
-                if (user != null) {
-                    validNewUser(user)
+        with(viewModelLogon) {
+            formState.observe(this@LogonActivity) { valid ->
+                if (!valid) {
+                    invalidNewUser()
+                } else {
+                    createNewUserAccount()
+                }
+            }
+
+            newUserState.observe(this@LogonActivity) { newUser ->
+                if (newUser != null) {
+                    validNewUser(newUser)
                 } else {
                     invalidNewUser()
                 }
@@ -50,17 +60,17 @@ class LogonActivity : AppCompatActivity() {
         }
     }
 
-    fun View.hideKeyboard() {
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(emailText_logon.windowToken, 0)
-        imm.hideSoftInputFromWindow(passwordText_logon.windowToken, 0)
-        imm.hideSoftInputFromWindow(userNameText_logon.windowToken, 0)
-        imm.hideSoftInputFromWindow(passwordText_confirm_logon.windowToken, 0)
+    private fun hideKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.emailTextLogon.windowToken, 0)
+        imm.hideSoftInputFromWindow(binding.passwordTextLogon.windowToken, 0)
+        imm.hideSoftInputFromWindow(binding.userNameTextLogon.windowToken, 0)
+        imm.hideSoftInputFromWindow(binding.passwordTextConfirmLogon.windowToken, 0)
     }
 
     private fun validNewUser(user: UserResponse?) {
-        btn_acess_logon.setText(R.string.text_account_newuser)
-        btn_acess_logon.setBackgroundColor(getColor(R.color.pass_blue))
+        binding.btnAcessLogon.setText(R.string.text_account_newuser)
+        binding.btnAcessLogon.setBackgroundColor(getColor(R.color.pass_blue))
         val intent = Intent(
             this,
             HomeActivity::class.java
@@ -72,12 +82,18 @@ class LogonActivity : AppCompatActivity() {
     }
 
     private fun invalidNewUser() {
-        passwordText_logon.requestFocus()
-        emailText_logon.requestFocus()
-        emailText_logon.error = getString(R.string.error_logon)
-        passwordText_logon.error = getString(R.string.error_logon)
-        btn_acess_logon.setText(R.string.error_logon)
-        btn_acess_logon.setBackgroundColor(getColor(R.color.error))
+        binding.passwordTextLogon.requestFocus()
+        binding.emailTextLogon.requestFocus()
+        binding.emailTextLogon.error = getString(R.string.error_logon)
+        binding.passwordTextLogon.error = getString(R.string.error_logon)
+        binding.btnAcessLogon.setText(R.string.error_logon)
+        binding.btnAcessLogon.setBackgroundColor(getColor(R.color.error))
+    }
+
+    private fun goToLoginScreen() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        clearFindViewByIdCache()
     }
 }
 

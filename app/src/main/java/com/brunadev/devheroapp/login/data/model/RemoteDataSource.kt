@@ -8,27 +8,30 @@ import io.reactivex.schedulers.Schedulers
 
 class RemoteDataSource {
 
-    fun loginRequest(user: User?): Observable<UserResponse> = HTTPClient.devHeroApi
+    fun loginRequest(user: User): Observable<UserResponse> = HTTPClient.devHeroApi
         .requestUser(
-            id = user?.id,
-            email = user?.email,
-            name = user?.name,
-            pass = user?.password,
-            passConfirm = user?.passwordConfirm
+            id = user.id,
+            email = user.email,
+            name = user.name,
+            pass = user.password,
+            passConfirm = user.passwordConfirm
         )
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
 
-    fun logonRequest(user: User?): Observable<UserResponse> = HTTPClient.devHeroApi
+    fun logonRequest(user: User): Observable<UserResponse> = HTTPClient.devHeroApi
         .requestUser(
-            id = user?.id,
-            email = user?.email,
-            name = user?.name,
-            pass = user?.password,
-            passConfirm = user?.passwordConfirm
+            id = user.id,
+            email = user.email,
+            name = user.name,
+            pass = user.password,
+            passConfirm = user.passwordConfirm
         )
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
 
-
+    fun listProjects(): Observable<List<Projects?>> = HTTPClient.devHeroApi
+        .listprojects()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
 }
