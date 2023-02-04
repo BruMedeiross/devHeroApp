@@ -6,7 +6,7 @@ O padrão Model > View > ViewModel visa a separacao de conceitos:
 
 - A VIEW : renderiza e trata a lógica referente aos componentes do usuário.(activity/fragment)
 - A ViewModel : responsável pela regra de negócio.
-- Model : faz a chamada pro webservice ou banco de dados.
+- Model : repository interage com o data source que faz a chamada pro webservice ou banco de dados.
 
 # Ferramentas e Recursos utilizados
 
