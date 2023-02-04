@@ -51,10 +51,10 @@ class LogonActivity : AppCompatActivity() {
             }
 
             newUserState.observe(this@LogonActivity) { newUser ->
-                if (newUser != null) {
-                    validNewUser(newUser)
+                if (newUser == null) {
+                    newUserCreated(newUser)
                 } else {
-                    invalidNewUser()
+                    errorCreateNewAccount()
                 }
             }
         }
@@ -68,7 +68,7 @@ class LogonActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(binding.passwordTextConfirmLogon.windowToken, 0)
     }
 
-    private fun validNewUser(user: UserResponse?) {
+    private fun newUserCreated(user: UserResponse?) {
         binding.btnAcessLogon.setText(R.string.text_account_newuser)
         binding.btnAcessLogon.setBackgroundColor(getColor(R.color.pass_blue))
         val intent = Intent(
@@ -87,6 +87,11 @@ class LogonActivity : AppCompatActivity() {
         binding.emailTextLogon.error = getString(R.string.error_logon)
         binding.passwordTextLogon.error = getString(R.string.error_logon)
         binding.btnAcessLogon.setText(R.string.error_logon)
+        binding.btnAcessLogon.setBackgroundColor(getColor(R.color.error))
+    }
+
+    private fun errorCreateNewAccount() {
+        binding.btnAcessLogon.setText(R.string.error_api)
         binding.btnAcessLogon.setBackgroundColor(getColor(R.color.error))
     }
 
