@@ -51,7 +51,7 @@ class LogonActivity : AppCompatActivity() {
             }
 
             newUserState.observe(this@LogonActivity) { newUser ->
-                if (newUser == null) {
+                if (newUser != null) {
                     newUserCreated(newUser)
                 } else {
                     errorCreateNewAccount()
