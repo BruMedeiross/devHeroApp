@@ -35,18 +35,12 @@ class LoginViewModel(private val repository: DevHeroRepository = DevHeroImpl()) 
         val liveDataRequest = repository.loginUser(
             User(email = email.get()?.trim(), password = password.get()?.trim())
         )
-        // Aqui o liveData do repository é adicionado como fonte de dados (source)
-        // para o MediatorLiveData. Uma vez que o dado é alterado (postValue no repository)
-        // o UserResponse é capturado dentro do bloco do Mediator.
-        // Dessa forma, ao expor o Mediator para a View, ela poderá observar a mudança de estado
-        // que ocorreu no Repository, graças ao Mediator.
         _userState.addSource(liveDataRequest) { userResponse ->
             _userState.postValue(userResponse)
         }
     }
 
-    private fun validate(): Boolean {
-        return if (email.get().toString().isEmpty()
+    private fun validate(): Boolean { return if (email.get().toString().isEmpty()
             || !email.get().toString().contains("@")
             || password.get().toString().isEmpty()
             || password.get().toString().length < 5

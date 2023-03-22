@@ -31,7 +31,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun userData(){
        binding.appUser.text = getString(R.string.devhero_name, nameUser)
-       binding.labelNotify.text = getString(R.string.label_notice_home_user, idUser?.length.toString())
+       binding.labelNotify.text = getString(R.string.label_notice_home_user, nameUser?.length.toString())
     }
 
     private fun goToLoginScreen() {

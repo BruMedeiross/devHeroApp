@@ -19,8 +19,4 @@ interface Api {
         @Query("pass") pass: String?,
         @Query("passConfirm") passConfirm: String?
     ): Observable<UserResponse>
-
-    @POST("/post")
-    fun logoutUser(): Observable<LoginResponse>
-
 }

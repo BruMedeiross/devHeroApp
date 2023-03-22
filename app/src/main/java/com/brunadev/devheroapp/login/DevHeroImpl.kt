@@ -1,7 +1,5 @@
 package com.brunadev.devheroapp.login
 
-
-import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.brunadev.devheroapp.login.data.model.RemoteDataSource
@@ -13,13 +11,12 @@ import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import java.util.*
 
-
 class DevHeroImpl : DevHeroRepository {
 
     private val remoteDataSource = RemoteDataSource()
     private val compositeDisposable = CompositeDisposable()
 
-    private var userA = User(UUID.randomUUID().toString(), "UserA", "b@", "123456", "123456")
+    private var userA = User(id = "1", name = "UserA", email = "b@", password = "123456", passwordConfirm = "123456")
 
     override fun loginUser(user: User): LiveData<UserResponse?> {
 
@@ -54,7 +51,7 @@ class DevHeroImpl : DevHeroRepository {
         return data
     }
 
-    override fun newUser(user: User): LiveData<UserResponse?>{
+    override fun newUser(user: User): LiveData<UserResponse?> {
 
         val data = MutableLiveData<UserResponse?>()
 

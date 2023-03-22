@@ -1,6 +1,5 @@
 package com.brunadev.devheroapp.login.commom
 
-import android.util.Base64
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -28,8 +27,8 @@ object HTTPClient {
     val devHeroApi: Api = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(okHttpClient)
-        .addConverterFactory(GsonConverterFactory.create(gson))
+        .addConverterFactory(GsonConverterFactory.create(gson)) //conversor de objetos
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
-        .create(Api::class.java)
+        .create(Api::class.java) // inicializa a api
 }
