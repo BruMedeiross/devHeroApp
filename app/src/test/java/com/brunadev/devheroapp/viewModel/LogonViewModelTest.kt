@@ -25,8 +25,6 @@ class LogonViewModelTest {
     private lateinit var viewModel: LogonViewModel
 
     private val userResponse = UserResponse(args = User("1", "bruna", "b@", "123456", "123456"))
-    private val newUser = User(id = "1", name ="bruna", email="b@", password = "123456", passwordConfirm = "123456")
-
 
     @Mock
     lateinit var repository: DevHeroRepository
@@ -63,8 +61,7 @@ class LogonViewModelTest {
     }
 
     @Test
-    @Ignore
-    fun given_for_new_user_account_response_success() {
+    fun given_new_user_account_response_success() {
 
         viewModel.email.set("b@")
         viewModel.userName.set("bruna")
@@ -74,10 +71,35 @@ class LogonViewModelTest {
         val liveDataNewAccount = MediatorLiveData<UserResponse?>()
         liveDataNewAccount.value = userResponse
 
+        val newUser = User(name ="bruna", email="b@", password = "123456", passwordConfirm = "123456")
+
         doReturn(liveDataNewAccount).`when`(repository).newUser(newUser)
 
         viewModel.createNewUserAccount()
+        viewModel.newUserState.observeForever {  }
 
         assertEquals(userResponse, viewModel.newUserState.value)
+    }
+
+
+    @Test
+    fun given_new_user_account_then_fail() {
+
+        viewModel.email.set("b@")
+        viewModel.userName.set("bruna")
+        viewModel.password.set("123456")
+        viewModel.confirmPass.set("123456")
+
+        val liveDataNewAccount = MediatorLiveData<UserResponse?>()
+        liveDataNewAccount.value = null
+
+        val newUser = User(name ="bruna", email="b@", password = "123456", passwordConfirm = "123456")
+
+        doReturn(liveDataNewAccount).`when`(repository).newUser(newUser)
+
+        viewModel.createNewUserAccount()
+        viewModel.newUserState.observeForever {  }
+
+        assertEquals(null, viewModel.newUserState.value)
     }
 }

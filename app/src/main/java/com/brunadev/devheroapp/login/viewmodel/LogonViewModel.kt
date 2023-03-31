@@ -34,7 +34,6 @@ class LogonViewModel(private val repository: DevHeroRepository = DevHeroImpl()) 
     fun createNewUserAccount() {
         val liveDataRequest = repository.newUser(
             User(
-                id = UUID.randomUUID().toString().trim(),
                 name = userName.get()?.trim(),
                 email = email.get()?.trim(),
                 password = password.get()?.trim(),

@@ -27,7 +27,6 @@ class LoginViewModelTest {
     private lateinit var viewModel: LoginViewModel
 
     private val userResponse = UserResponse(args = User("1", "bruna", "b@", "123456", "123456"))
-    private val user = User(email = "b@", password = "123456")
 
     @Mock
     lateinit var repository: DevHeroRepository
@@ -69,7 +68,8 @@ class LoginViewModelTest {
         val liveData = MediatorLiveData<UserResponse?>()
         liveData.value = userResponse
 
-       doReturn(liveData).`when`(repository).loginUser(user)
+        val user = User(email = "b@", password = "123456")
+        doReturn(liveData).`when`(repository).loginUser(user)
 
         viewModel.request()
 
@@ -77,19 +77,20 @@ class LoginViewModelTest {
     }
 
     @Test
-    @Ignore
     fun given_request_login_user_then_fail(){
 
         viewModel.email.set("b@")
         viewModel.password.set("111111")
 
         val liveData = MediatorLiveData<UserResponse?>()
-        liveData.value = userResponse
+        liveData.value = null
 
+        val user = User(email = "b@", password = "111111")
         doReturn(liveData).`when`(repository).loginUser(user)
 
         viewModel.request()
+        viewModel.userState.observeForever {  }
 
-        assertEquals(userResponse, liveData.value)
+        assertEquals(null, viewModel.userState.value)
     }
 }

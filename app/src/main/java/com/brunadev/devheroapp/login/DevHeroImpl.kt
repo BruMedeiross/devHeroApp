@@ -52,6 +52,7 @@ class DevHeroImpl : DevHeroRepository {
     }
 
     override fun newUser(user: User): LiveData<UserResponse?> {
+        user.id =  UUID.randomUUID().toString().trim()
 
         val data = MutableLiveData<UserResponse?>()
 
