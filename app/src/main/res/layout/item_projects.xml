@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="5dp"
     app:cardCornerRadius="15dp"
-    app:cardElevation="8dp">
+    app:cardElevation="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/box_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
@@ -22,7 +22,8 @@
             android:orientation="vertical"
             android:scaleType="centerCrop"
             android:elevation="5dp"
-            tools:src="@tools:sample/avatars"
+            android:backgroundTint="@color/pass_blue"
+            android:background="@drawable/ic_launcher_foreground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -40,7 +41,7 @@
             />
 
         <TextView
-            android:id="@+id/type_company"
+            android:id="@+id/email_company"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -53,7 +54,7 @@
             />
 
         <TextView
-            android:id="@+id/local_company"
+            android:id="@+id/hours_company"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -62,7 +63,7 @@
             android:textColor="@color/black2"
             android:text="saldo - 24h"
             app:layout_constraintStart_toEndOf="@+id/img_company"
-            app:layout_constraintTop_toBottomOf="@id/type_company"
+            app:layout_constraintTop_toBottomOf="@id/email_company"
             />
 
 

@@ -31,7 +31,7 @@ class RemoteDataSource {
         .observeOn(AndroidSchedulers.mainThread())
 
     fun listProjects(): Observable<List<Projects?>> = HTTPClient.devHeroApi
-        .listprojects()
+        .listProjects()
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
 }
