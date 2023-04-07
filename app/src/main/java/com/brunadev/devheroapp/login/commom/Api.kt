@@ -1,6 +1,5 @@
 package com.brunadev.devheroapp.login.commom
 
-import com.brunadev.devheroapp.login.data.model.LoginResponse
 import com.brunadev.devheroapp.login.data.model.Projects
 import com.brunadev.devheroapp.login.data.model.UserResponse
 import io.reactivex.Observable

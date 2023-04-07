@@ -22,7 +22,7 @@ class DevHeroImpl : DevHeroRepository {
 
         val data = MutableLiveData<UserResponse?>()
 
-        if (userA.email.equals(user?.email) && userA.password.equals(user?.password)) {
+        if (userA.email.equals(user.email) && userA.password.equals(user.password)) {
             val disposableObserver = remoteDataSource.loginRequest(userA)
                 .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())

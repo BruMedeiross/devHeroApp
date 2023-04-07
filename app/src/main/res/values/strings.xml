@@ -19,7 +19,7 @@
     <string name="pass_error">Senha Inválida</string>
     <string name="email_error">Email inválido</string>
     <string name="error_login">Verifique dados de acesso ou cadastre-se</string>
-    <string name="error_logon">Todos os campos precisam estar prenchidos</string>
+    <string name="error_logon">Todos os campos precisam estar preenchidos</string>
     <string name="text_project_information">Meus projetos:</string>
     <string name="item_mail">teste@teste.com.br</string>
     <string name="item_name">Google</string>
