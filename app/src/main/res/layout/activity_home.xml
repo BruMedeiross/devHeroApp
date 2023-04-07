@@ -34,25 +34,10 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/label_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/label_login"
-                    android:textColor="@color/black2"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/btn_logout"
-                    app:layout_constraintTop_toTopOf="@id/btn_logout" />
-
-                <TextView
                     android:id="@+id/btn_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:drawableBottom="@drawable/ic_baseline_horizontal_rule_24"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/label_logout"
                     android:textColor="@color/black"
@@ -89,8 +74,7 @@
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/label_notify"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/label_notify" />
 
                 <TextView
                     android:id="@+id/project_information"
@@ -109,9 +93,9 @@
                     android:id="@+id/rv_list"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginStart="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

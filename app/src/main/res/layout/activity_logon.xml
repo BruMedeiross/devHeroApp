@@ -32,7 +32,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:drawableBottom="@drawable/ic_baseline_horizontal_rule_24"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/label_login"
                 android:textColor="@color/black"
@@ -47,6 +46,7 @@
                 android:layout_margin="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/label_logon"
+                android:drawableBottom="@drawable/ic_baseline_horizontal_rule_24"
                 android:textColor="@color/black2"
                 android:textSize="16sp"
                 android:textStyle="bold" />
