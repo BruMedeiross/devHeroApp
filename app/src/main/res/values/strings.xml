@@ -28,9 +28,13 @@
     <string name="password_confirm">Confirmar senha</string>
     <string name="text_account">Criar sua conta</string>
     <string name="text_account_newuser">Conta Registrada</string>
+    <string name="text_account_register">Registrando Usuário</string>
     <string name="text_app_information_account">Apresente seu trabalho e encontre novas inspirações, escolhidas especialmente pra você</string>
     <string name="pass_error_confirm">Senhas não conferem</string>
     <string name="username_error">Nome de usuário inválido</string>
     <string name="label_logout">Logout</string>
     <string name="error_api">Ops! Algo deu errado. Tente novamente.</string>
+    <string name="loading">Entrando...</string>
+    <string name="acess">Acessar conta</string>
+    <string name="acess_google">Acessar com Google</string>
 </resources>

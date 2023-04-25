@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModelHome"
+            type="com.brunadev.devheroapp.login.viewmodel.HomeViewModel" />
     </data>
 
     <FrameLayout
@@ -101,8 +104,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/project_information"
                     tools:listitem="@layout/item_projects" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </ScrollView>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/pass_blue"
+            android:src="@drawable/ic_add"
+            app:maxImageSize="48dp"
+            android:layout_gravity="right | bottom" />
     </FrameLayout>
 </layout>

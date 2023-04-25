@@ -2,10 +2,12 @@ package com.brunadev.devheroapp.login.viewmodel
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.*
+import com.brunadev.devheroapp.R
 import com.brunadev.devheroapp.login.DevHeroRepository
 import com.brunadev.devheroapp.login.DevHeroImpl
 import com.brunadev.devheroapp.login.data.model.User
 import com.brunadev.devheroapp.login.data.model.UserResponse
+import com.github.razir.progressbutton.hideProgress
 
 
 class LoginViewModel(private val repository: DevHeroRepository = DevHeroImpl()) :

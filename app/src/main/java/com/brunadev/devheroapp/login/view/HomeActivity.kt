@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.brunadev.devheroapp.R
 import com.brunadev.devheroapp.databinding.ActivityHomeBinding
 import com.brunadev.devheroapp.login.data.model.Projects
+import com.brunadev.devheroapp.login.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.item_projects.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class HomeActivity : AppCompatActivity() {
@@ -17,7 +18,7 @@ class HomeActivity : AppCompatActivity() {
     private var idUser: String? = ""
     private var nameUser: String? = ""
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var listAdapter: ListProjectsAdapter
+    private val viewModelHome: HomeViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,23 +27,11 @@ class HomeActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val listProjects = arrayListOf(
-            Projects(company = "Google", email = "google_company@gmail.com", hours = "Contrato - 50h"),
-            Projects(company = "HomeLand", email = "homeland_company@gmail.com", hours = "Contrato - 40h"),
-            Projects(company = "JS", email = "js_company@gmail.com", hours = "Contrato - 80h"),
-            Projects(company = "HomeLand", email = "homeland_company@gmail.com", hours = "Contrato - 50h"),
-            Projects(company = "Google", email = "google_company@gmail.com", hours = "Contrato - 25h"),
-            Projects(company = "HomeLand", email = "homeland_company@gmail.com", hours = "Contrato - 150h"),
-            Projects(company = "JS", email = "js_company@gmail.com", hours = "Contrato - 80h"),
-            Projects(company = "HomeLand", email = "homeland_company@gmail.com", hours = "Contrato - 50h")
-        )
+        setObservers()
 
-        listAdapter = ListProjectsAdapter(listProjects) { company ->
-            Toast.makeText(this, "$company", Toast.LENGTH_SHORT).show()
-        }
+        binding.viewModelHome = viewModelHome
 
-        rv_list.layoutManager = LinearLayoutManager(this)
-        rv_list.adapter = listAdapter
+        rv_list.layoutManager = LinearLayoutManager(this@HomeActivity)
 
         nameUser = intent.extras?.getString("nameUser")
         idUser = intent.extras?.getString("idUser")
@@ -51,6 +40,22 @@ class HomeActivity : AppCompatActivity() {
 
         binding.btnLogout.setOnClickListener {
             goToLoginScreen()
+        }
+    }
+
+    private fun setObservers() {
+        viewModelHome.getAllProjects().observe(this@HomeActivity) { projectList ->
+            if (projectList != null) {
+                showProjects(projectList)
+            }
+        }
+    }
+
+    private fun showProjects(projectList: List<Projects>) {
+        if (projectList != null) {
+            rv_list.adapter = ListProjectsAdapter(projectList ) { company ->
+                Toast.makeText(this, "$company", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

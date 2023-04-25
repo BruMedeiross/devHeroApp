@@ -2,18 +2,22 @@ package com.brunadev.devheroapp.login.view
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.brunadev.devheroapp.R
 import com.brunadev.devheroapp.databinding.ActivityMainBinding
 import com.brunadev.devheroapp.login.data.model.UserResponse
 import com.brunadev.devheroapp.login.viewmodel.LoginViewModel
+import com.github.razir.progressbutton.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModelLogin: LoginViewModel
+    private val viewModelLogin: LoginViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,12 +27,13 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        viewModelLogin = ViewModelProvider(this)[LoginViewModel::class.java]
-        binding.viewModelLogin = viewModelLogin
-
+        this@MainActivity.bindProgressButton(binding.btnAcess)
         setObservers()
 
+        binding.viewModelLogin = viewModelLogin
+
         binding.btnAcess.setOnClickListener {
+            showProgress()
             hideKeyboard()
             viewModelLogin.doLogin()
         }
@@ -36,6 +41,46 @@ class MainActivity : AppCompatActivity() {
         binding.labelLogon.setOnClickListener {
             goToLogonScreen()
         }
+
+        binding.btnAcessGoogle.setOnClickListener {
+            acessGoogle()
+        }
+
+    }
+
+    private fun acessGoogle() {
+        Thread{
+            runOnUiThread {
+                Thread.sleep(2000)
+                binding.btnAcessGoogle.showProgress{
+                    buttonTextRes = R.string.loading
+                    progressColor = Color.BLACK
+                }
+            }
+        }.start()
+    }
+
+    private fun showProgress() {
+        binding.btnAcess.setBackgroundColor(getColor(R.color.blue))
+
+        binding.btnAcess.attachTextChangeAnimator {
+            fadeOutMills = 300
+            fadeInMills = 400
+            useCurrentTextColor = false
+
+            textColor = Color.WHITE
+            textColorRes = R.color.white
+        }
+
+        binding.btnAcess.showProgress{
+            buttonTextRes = R.string.loading
+            progressColor = Color.WHITE
+        }
+    }
+
+    private fun hideProgress() {
+        binding.btnAcess.hideProgress(R.string.acess)
+        binding.btnAcessGoogle.hideProgress(R.string.acess_google)
     }
 
     private fun setObservers() {
@@ -43,6 +88,7 @@ class MainActivity : AppCompatActivity() {
             formState.observe(this@MainActivity) { valid ->
                 if (!valid) {
                     invalidLogin()
+                    hideProgress()
                 } else {
                     request()
                 }
@@ -55,6 +101,7 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     invalidLogin()
                 }
+                hideProgress()
             }
         }
     }

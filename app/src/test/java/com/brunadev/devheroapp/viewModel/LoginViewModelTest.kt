@@ -1,7 +1,6 @@
 package com.brunadev.devheroapp.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.brunadev.devheroapp.login.DevHeroRepository
 import com.brunadev.devheroapp.login.data.model.User
@@ -10,7 +9,6 @@ import com.brunadev.devheroapp.login.viewmodel.LoginViewModel
 import com.nhaarman.mockito_kotlin.*
 import junit.framework.TestCase.assertEquals
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule

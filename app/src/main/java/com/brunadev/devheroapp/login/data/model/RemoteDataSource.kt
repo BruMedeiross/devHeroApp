@@ -30,8 +30,9 @@ class RemoteDataSource {
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
 
-    fun listProjects(): Observable<List<Projects?>> = HTTPClient.devHeroApi
+    fun listProjects(): Observable<List<Projects>> = HTTPClient.devHeroApi
         .listProjects()
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
+
 }

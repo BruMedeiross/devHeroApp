@@ -2,6 +2,7 @@ package com.brunadev.devheroapp.login.view
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
@@ -10,12 +11,16 @@ import com.brunadev.devheroapp.R
 import com.brunadev.devheroapp.databinding.ActivityLogonBinding
 import com.brunadev.devheroapp.login.data.model.UserResponse
 import com.brunadev.devheroapp.login.viewmodel.LogonViewModel
+import com.github.razir.progressbutton.attachTextChangeAnimator
+import com.github.razir.progressbutton.hideProgress
+import com.github.razir.progressbutton.showProgress
 import kotlinx.android.synthetic.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class LogonActivity : AppCompatActivity() {
 
-    private lateinit var viewModelLogon: LogonViewModel
+    private val viewModelLogon: LogonViewModel by viewModel()
     private lateinit var binding: ActivityLogonBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,12 +30,12 @@ class LogonActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        viewModelLogon = ViewModelProvider(this)[LogonViewModel::class.java]
         binding.viewModelLogon = viewModelLogon
 
         setObservers()
 
         binding.btnAcessLogon.setOnClickListener {
+            showProgress()
             hideKeyboard()
             viewModelLogon.newUserAccount()
         }
@@ -53,10 +58,34 @@ class LogonActivity : AppCompatActivity() {
             newUserState.observe(this@LogonActivity) { newUser ->
                 if (newUser != null) {
                     newUserCreated(newUser)
+                    hideProgress()
                 } else {
                     errorCreateNewAccount()
                 }
             }
+        }
+    }
+
+
+    private fun hideProgress() {
+        binding.btnAcessLogon.hideProgress(R.string.text_account_newuser)
+    }
+
+    private fun showProgress() {
+        binding.btnAcessLogon.setBackgroundColor(getColor(R.color.blue))
+
+        binding.btnAcessLogon.attachTextChangeAnimator {
+            fadeOutMills = 300
+            fadeInMills = 400
+            useCurrentTextColor = false
+
+            textColor = Color.WHITE
+            textColorRes = R.color.white
+        }
+
+        binding.btnAcessLogon.showProgress{
+            buttonTextRes = R.string.text_account_register
+            progressColor = Color.WHITE
         }
     }
 
@@ -70,7 +99,7 @@ class LogonActivity : AppCompatActivity() {
 
     private fun newUserCreated(user: UserResponse?) {
         binding.btnAcessLogon.setText(R.string.text_account_newuser)
-        binding.btnAcessLogon.setBackgroundColor(getColor(R.color.pass_blue))
+        binding.btnAcessLogon.setBackgroundColor(getColor(R.color.blue))
         val intent = Intent(
             this,
             HomeActivity::class.java

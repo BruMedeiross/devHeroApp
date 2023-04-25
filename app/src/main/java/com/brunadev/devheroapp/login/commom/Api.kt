@@ -8,7 +8,7 @@ import retrofit2.http.*
 interface Api {
 
     @GET("/image")
-    fun listProjects(): Observable<List<Projects?>>
+    fun listProjects(): Observable<List<Projects>>
 
     @POST("/post")
     fun requestUser(
