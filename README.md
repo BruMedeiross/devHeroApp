@@ -14,6 +14,7 @@ O padrão Model > View > ViewModel visa a separacao de conceitos:
 - LiveData and ViewModel : manipular a UI e observer
 - MediatorLiveData
 - binding e dataBinding
+- Testes: unitários | instrumentados
 
 # API - httpbin.org
 A simple HTTP Request & Response Service.
