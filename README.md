@@ -17,7 +17,7 @@ O padrão Model > View > ViewModel visa a separacao de conceitos:
 - Testes: unitários | instrumentados
 
 Em desenvolvimento:
--  Shimmmer
+-  Shimmer
 -  Banco de Dados e API do Projeto
 -  Componetes personalizados
 -  Publicar PlayStore
