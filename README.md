@@ -16,6 +16,12 @@ O padrão Model > View > ViewModel visa a separacao de conceitos:
 - binding e dataBinding
 - Testes: unitários | instrumentados
 
+Em desenvolvimento:
+-  Shimmmer
+-  Banco de Dados e API do Projeto
+-  Componetes personalizados
+-  Publicar PlayStore
+
 # API - httpbin.org
 A simple HTTP Request & Response Service.
 
