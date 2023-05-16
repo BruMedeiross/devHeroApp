@@ -19,7 +19,7 @@ O padrão Model > View > ViewModel visa a separacao de conceitos:
 Em desenvolvimento:
 -  Shimmer
 -  Banco de Dados e API do Projeto
--  Componetes personalizados
+-  Componentes personalizados
 -  Publicar PlayStore
 
 # API - httpbin.org
