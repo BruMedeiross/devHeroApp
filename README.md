@@ -1,4 +1,4 @@
-# devHeroApp
+# devHeroApp (in progress)
 
 No APP desenvolvido foi realizada a consulta de uma API publica com padrão MVVM
 
@@ -14,6 +14,13 @@ O padrão Model > View > ViewModel visa a separacao de conceitos:
 - LiveData and ViewModel : manipular a UI e observer
 - MediatorLiveData
 - binding e dataBinding
+- Testes: unitários | instrumentados
+
+Em desenvolvimento:
+-  Shimmer (skeleton)
+-  Banco de Dados e API do Projeto
+-  Componentes personalizados
+-  Publicar PlayStore
 
 # API - httpbin.org
 A simple HTTP Request & Response Service.
