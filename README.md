@@ -18,7 +18,7 @@ O padrão Model > View > ViewModel visa a separacao de conceitos:
 
 Em desenvolvimento:
 -  Shimmer (skeleton)
--  Banco de Dados e API do Projeto
+-  Banco de Dados e API para o Projeto 
 -  Componentes personalizados
 -  Publicar PlayStore
 
