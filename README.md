@@ -16,7 +16,7 @@ O padrão Model > View > ViewModel visa a separacao de conceitos:
 - binding e dataBinding
 - Testes: unitários | instrumentados
 
-Em desenvolvimento:
+*Em desenvolvimento:
 -  Shimmer (skeleton)
 -  Banco de Dados e API para o Projeto 
 -  Componentes personalizados
