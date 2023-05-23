@@ -15,11 +15,12 @@ O padrão Model > View > ViewModel visa a separacao de conceitos:
 - MediatorLiveData
 - binding e dataBinding
 - Testes: unitários | instrumentados
+- Componentes personalizados
 
 *Em desenvolvimento:*
 -  Shimmer (skeleton)
--  Banco de Dados e API para o Projeto 
--  Componentes personalizados
+-  API para o Projeto (python) 
+-  Banco de Dados (db brouser sqlite)
 -  Publicar PlayStore
 
 # API - httpbin.org
