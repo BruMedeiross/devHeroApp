@@ -16,7 +16,6 @@ class LogonActivityTest {
             checkIsDisplayed()
             checkAppName()
             checkTitleCreateAcoount()
-            checkTitleError()
         }
     }
 

@@ -3,13 +3,14 @@ package com.brunadev.devheroapp.viewModel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MediatorLiveData
 import com.brunadev.devheroapp.login.DevHeroRepository
+import com.brunadev.devheroapp.login.data.model.NewUser
+import com.brunadev.devheroapp.login.data.model.NewUserResponser
 import com.brunadev.devheroapp.login.data.model.User
 import com.brunadev.devheroapp.login.data.model.UserResponse
 import com.brunadev.devheroapp.login.viewmodel.LogonViewModel
 import com.nhaarman.mockito_kotlin.doReturn
 import junit.framework.TestCase.assertEquals
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,7 +25,7 @@ class LogonViewModelTest {
 
     private lateinit var viewModel: LogonViewModel
 
-    private val userResponse = UserResponse(args = User("1", "bruna", "b@", "123456", "123456"))
+    private val userResponse = NewUserResponser("b@", "123456")
 
     @Mock
     lateinit var repository: DevHeroRepository
@@ -68,10 +69,10 @@ class LogonViewModelTest {
         viewModel.password.set("123456")
         viewModel.confirmPass.set("123456")
 
-        val liveDataNewAccount = MediatorLiveData<UserResponse?>()
+        val liveDataNewAccount = MediatorLiveData<NewUserResponser?>()
         liveDataNewAccount.value = userResponse
 
-        val newUser = User(name ="bruna", email="b@", password = "123456", passwordConfirm = "123456")
+        val newUser = NewUser(username ="bruna", email="b@", password = "123456")
 
         doReturn(liveDataNewAccount).`when`(repository).newUser(newUser)
 
@@ -90,10 +91,10 @@ class LogonViewModelTest {
         viewModel.password.set("123456")
         viewModel.confirmPass.set("123456")
 
-        val liveDataNewAccount = MediatorLiveData<UserResponse?>()
+        val liveDataNewAccount = MediatorLiveData<NewUserResponser?>()
         liveDataNewAccount.value = null
 
-        val newUser = User(name ="bruna", email="b@", password = "123456", passwordConfirm = "123456")
+        val newUser = NewUser(username ="bruna", email="b@", password = "123456")
 
         doReturn(liveDataNewAccount).`when`(repository).newUser(newUser)
 

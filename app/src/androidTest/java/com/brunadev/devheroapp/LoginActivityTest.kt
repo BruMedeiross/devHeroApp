@@ -2,7 +2,7 @@ package com.brunadev.devheroapp
 
 import org.junit.Test
 
-class MainActivityTest {
+class LoginActivityTest {
 
     @Test
     fun givenHomeActivityWhenClickButtonThenCheckDisplayedItens() {

@@ -1,21 +1,28 @@
 package com.brunadev.devheroapp.login.commom
 
-import com.brunadev.devheroapp.login.data.model.Projects
-import com.brunadev.devheroapp.login.data.model.UserResponse
+import com.brunadev.devheroapp.login.data.model.*
 import io.reactivex.Observable
 import retrofit2.http.*
 
 interface Api {
 
-    @GET("/image")
-    fun listProjects(): Observable<List<Projects>>
-
-    @POST("/post")
+    @POST("auth/users/")
     fun requestUser(
-        @Query("id") id: String?,
-        @Query("email") email: String?,
-        @Query("name") name: String?,
-        @Query("pass") pass: String?,
-        @Query("passConfirm") passConfirm: String?
+        @Body user: NewUser
+    ): Observable<NewUserResponser>
+
+    @POST("auth/token/login")
+    fun requestLogin(
+        @Body user: User
     ): Observable<UserResponse>
+
+    @POST("items/")
+    fun addItem(
+        @Body project: AddRequest
+    ): Observable<AddResponse>
+
+    @GET("items/")
+    fun getProjects(
+    ): Observable<List<Projects>>
+
 }

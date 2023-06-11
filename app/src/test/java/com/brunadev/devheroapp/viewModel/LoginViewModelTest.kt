@@ -3,6 +3,7 @@ package com.brunadev.devheroapp.viewModel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MediatorLiveData
 import com.brunadev.devheroapp.login.DevHeroRepository
+import com.brunadev.devheroapp.login.data.model.NewUser
 import com.brunadev.devheroapp.login.data.model.User
 import com.brunadev.devheroapp.login.data.model.UserResponse
 import com.brunadev.devheroapp.login.viewmodel.LoginViewModel
@@ -24,7 +25,7 @@ class LoginViewModelTest {
 
     private lateinit var viewModel: LoginViewModel
 
-    private val userResponse = UserResponse(args = User("1", "bruna", "b@", "123456", "123456"))
+    private val userResponse = UserResponse("b@", "123456", "b@")
 
     @Mock
     lateinit var repository: DevHeroRepository
@@ -48,8 +49,8 @@ class LoginViewModelTest {
     @Test
     fun given_invalid_login_user(){
 
-        viewModel.email.set("mail")
-        viewModel.password.set("123456")
+        viewModel.email.set("b")
+        viewModel.password.set("")
 
         viewModel.doLogin()
 

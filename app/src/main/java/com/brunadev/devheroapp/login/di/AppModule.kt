@@ -3,6 +3,7 @@ package com.brunadev.devheroapp.login.di
 import com.brunadev.devheroapp.login.DevHeroImpl
 import com.brunadev.devheroapp.login.DevHeroRepository
 import com.brunadev.devheroapp.login.commom.Api
+import com.brunadev.devheroapp.login.viewmodel.DialogViewModel
 import com.brunadev.devheroapp.login.viewmodel.HomeViewModel
 import com.brunadev.devheroapp.login.viewmodel.LoginViewModel
 import com.brunadev.devheroapp.login.viewmodel.LogonViewModel
@@ -19,6 +20,7 @@ object AppModule {
         viewModel { LoginViewModel(get()) }
         viewModel { LogonViewModel(get()) }
         viewModel { HomeViewModel(get()) }
+        viewModel { DialogViewModel(get()) }
     }
 
     private fun provideApi(retrofit: Retrofit): Api =

@@ -2,9 +2,9 @@
     <string name="app_name">DevHeroApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="label_notice_login">18 novas notificações</string>
-    <string name="label_notice_home">novas notificações</string>
-    <string name="label_notice_home_user">%1$s novas notificações</string>
+    <string name="label_notice_home">Você tem 0 projetos</string>
+    <string name="label_notice_login">novas notificações</string>
+    <string name="label_notice_home_user">Você tem %1$s projetos</string>
     <string name="email">E-mail</string>
     <string name="text_welcome_home">Bem-vindo(a) de volta</string>
     <string name="text_welcome_loguin">Bem-vindo(a) de\nvolta, <b><font color="#2196F3">%1$s</font></b></string>
@@ -18,9 +18,10 @@
     <string name="login">user logado</string>
     <string name="pass_error">Senha Inválida</string>
     <string name="email_error">Email inválido</string>
+    <string name="error_add">Preencha os campos</string>
     <string name="error_login">Verifique dados de acesso ou cadastre-se</string>
     <string name="error_logon">Todos os campos precisam estar preenchidos</string>
-    <string name="text_project_information">Meus projetos:</string>
+    <string name="text_project_information">Meus projetos</string>
     <string name="item_mail">teste@teste.com.br</string>
     <string name="item_name">Google</string>
     <string name="devhero_name">DevHero: <b><font color="#2196F3">%1$s</font></b></string>
@@ -37,4 +38,10 @@
     <string name="loading">Entrando...</string>
     <string name="acess">Acessar conta</string>
     <string name="acess_google">Acessar com Google</string>
+    <string name="priority">Etapa</string>
+    <string name="priority_1">Em Análise</string>
+    <string name="priority_2">Em Desenvolvimento</string>
+    <string name="priority_3">Testes</string>
+    <string name="priority_4">Concluído</string>
+
 </resources>

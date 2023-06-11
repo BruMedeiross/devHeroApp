@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.brunadev.devheroapp.R
 import com.brunadev.devheroapp.login.data.model.Projects
 import kotlinx.android.synthetic.main.item_projects.view.*
-import kotlin.time.Duration.Companion.hours
 
 class ListProjectsAdapter(private val listProjects: List<Projects>, val onClick: (Projects) -> Unit) : RecyclerView.Adapter<ListProjectsAdapter.VideoHolder>() {
+    private var characterList = emptyList<Projects>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoHolder =
         VideoHolder(
@@ -26,17 +26,21 @@ class ListProjectsAdapter(private val listProjects: List<Projects>, val onClick:
         holder.bind(listProjects[position])
     }
 
+    fun update(list: List<Projects>) {
+        characterList = list
+        notifyDataSetChanged()
+    }
+
     inner class VideoHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(list: Projects) {
             with(itemView) {
                 setOnClickListener {
                     onClick.invoke(list)
                 }
-                name_company.text = list.company
-                email_company.text = list.email
-                hours_company.text = list.hours
+                name_company.text = list.title
+                email_company.text = list.desc
+                hours_company.text = list.priority.toString()
                 data_project.text = list.data.toString()
-
             }
         }
     }

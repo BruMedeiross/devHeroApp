@@ -3,22 +3,27 @@ package com.brunadev.devheroapp.login.view
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.content.ContextCompat.getSystemService
 import com.brunadev.devheroapp.R
 import com.brunadev.devheroapp.databinding.ActivityMainBinding
+import com.brunadev.devheroapp.login.BaseApplication
+import com.brunadev.devheroapp.login.commom.NetworkChecker
 import com.brunadev.devheroapp.login.data.model.UserResponse
 import com.brunadev.devheroapp.login.viewmodel.LoginViewModel
 import com.github.razir.progressbutton.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private val viewModelLogin: LoginViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
+    private val networkChecker by lazy {
+        NetworkChecker(getSystemService(this@LoginActivity, ConnectivityManager::class.java))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,15 +32,17 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        this@MainActivity.bindProgressButton(binding.btnAcess)
+        this@LoginActivity.bindProgressButton(binding.btnAcess)
         setObservers()
 
         binding.viewModelLogin = viewModelLogin
 
         binding.btnAcess.setOnClickListener {
-            showProgress()
-            hideKeyboard()
-            viewModelLogin.doLogin()
+            networkChecker.performActionIfConnectet {
+                showProgress()
+                hideKeyboard()
+                viewModelLogin.doLogin()
+            }
         }
 
         binding.labelLogon.setOnClickListener {
@@ -48,15 +55,21 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        BaseApplication.saveToken(null)
+    }
+
     private fun acessGoogle() {
         Thread{
             runOnUiThread {
-                Thread.sleep(2000)
+                Thread.sleep(1000)
                 binding.btnAcessGoogle.showProgress{
                     buttonTextRes = R.string.loading
                     progressColor = Color.BLACK
                 }
             }
+
         }.start()
     }
 
@@ -85,7 +98,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setObservers() {
         with(viewModelLogin) {
-            formState.observe(this@MainActivity) { valid ->
+            formState.observe(this@LoginActivity) { valid ->
                 if (!valid) {
                     invalidLogin()
                     hideProgress()
@@ -94,7 +107,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            userState.observe(this@MainActivity) { user ->
+            userState.observe(this@LoginActivity) { user ->
                 if (user != null) {
                     validLogin(user)
                     goToHomeScreen(user)
@@ -113,23 +126,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun validLogin(user: UserResponse?) {
-        binding.welcome.text = getString(R.string.text_welcome_loguin, user?.args?.name)
-        binding.labelNotify.text =
-            getString(R.string.label_notice_home_user, user?.args?.id?.length.toString())
+        binding.welcome.text = getString(R.string.text_welcome_loguin, "DEV.")
         binding.emailText.error = null
         binding.passwordText.error = null
     }
 
     private fun goToHomeScreen(user: UserResponse?) {
         val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("idUser", user?.args?.id)
-        intent.putExtra("nameUser", user?.args?.name)
+        intent.putExtra("idUser", user?.token?.length)
+        intent.putExtra("nameUser", user?.email.toString())
         startActivity(intent)
     }
 
     private fun goToLogonScreen() {
         val intent = Intent(this, LogonActivity::class.java)
         startActivity(intent)
+        BaseApplication.saveToken(null)
     }
 
     private fun invalidLogin() {
@@ -137,6 +149,11 @@ class MainActivity : AppCompatActivity() {
         binding.emailText.requestFocus()
         binding.emailText.error = getString(R.string.error_login)
         binding.passwordText.error = getString(R.string.error_login)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        BaseApplication.saveToken(null)
     }
 }
 

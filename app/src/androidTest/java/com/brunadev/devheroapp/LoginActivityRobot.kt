@@ -4,9 +4,9 @@ import android.content.Intent
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import com.brunadev.devheroapp.login.DevHeroRepository
-import com.brunadev.devheroapp.login.view.MainActivity
+import com.brunadev.devheroapp.login.view.LoginActivity
 
-fun MainActivityTest.withMainActivity(
+fun LoginActivityTest.withMainActivity(
     func: MainActivityRobot.() -> Unit
 ) = MainActivityRobot().apply(func)
 
@@ -17,8 +17,8 @@ class MainActivityRobot {
 
     fun launchEmptyActivity(){
 
-        val intent = Intent(ApplicationProvider.getApplicationContext(), MainActivity::class.java)
-        ActivityScenario.launch<MainActivity>(intent)
+        val intent = Intent(ApplicationProvider.getApplicationContext(), LoginActivity::class.java)
+        ActivityScenario.launch<LoginActivity>(intent)
     }
 
     fun clickBtnLogin() = R.id.btn_acess.click()

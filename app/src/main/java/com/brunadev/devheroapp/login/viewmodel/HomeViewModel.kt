@@ -7,5 +7,6 @@ import com.brunadev.devheroapp.login.DevHeroRepository
 
 class HomeViewModel(private val repository: DevHeroRepository = DevHeroImpl()) : ViewModel() {
 
-    fun getAllProjects() = repository.getProjects()
+    fun getFakeProjects() = repository.getProjects()
+    fun getAllProjects() = repository.getProjectsAPI()
 }
