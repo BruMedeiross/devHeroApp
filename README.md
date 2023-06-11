@@ -16,11 +16,11 @@ O padrão Model > View > ViewModel visa a separacao de conceitos:
 - binding e dataBinding
 - Testes: unitários | instrumentados
 - Componentes personalizados
+- API para o Projeto (python) 
+- Banco de Dados (db brouser sqlite)
 
 *Em desenvolvimento:*
 -  Shimmer (skeleton)
--  API para o Projeto (python) 
--  Banco de Dados (db brouser sqlite)
 -  Publicar PlayStore
 
 # API - httpbin.org
